@@ -14,7 +14,7 @@ def crawler():
         rows['data']=[]
         group = 'fds' #group name : javforever, jav, fds, hdd, fap2vn, javfshare and more
         y = 1
-        while y <= 3: #total pagination
+        while y <= 3: # 3 : max number of pagination
             url =  ('http://onecloud.media/group/%s?page=%s' % (group, y))
             req = requests.get(url)
             result = bs4.BeautifulSoup(req.text)
@@ -43,12 +43,12 @@ def crawler():
                     coll.insert(data)
             y = y + 1         
         rows['meta'] = {
-            'code'      : '200',
+            'code'      : 200,
             'message'   : 'OK'
         }        
     except Exception as e:
         rows['meta'] = {
-            'code'      : '404',
+            'code'      : 500,
             'message'   : str(e)
         }
     return jsonify(rows)
